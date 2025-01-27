@@ -2,25 +2,25 @@
 import './App.css';
 
 
-'use client'
-import { gql, useQuery } from "@apollo/client"
+//'use client'
+//import { gql, useQuery } from "@apollo/client"
 
-const GET_LOCATIONS = gql`
-  query GetLocations {
-    locations {
-      id
-      name
-      description
-      photo
-    }
-  }
-`;
+// const GET_LOCATIONS = gql`
+//   query GetLocations {
+//     locations {
+//       id
+//       name
+//       description
+//       photo
+//     }
+//   }
+// `;
 
-;
+// ;
 
 function App() {
 
-  const { loading, error, data } = useQuery(GET_LOCATIONS)
+  //const { loading, error, data } = useQuery(GET_LOCATIONS)
   return (
     <div className="App">
       <header className="App-header">

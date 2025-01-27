@@ -1,36 +1,71 @@
+// Import everything needed to use the `useQuery` hook
 
-import './App.css';
+import { useQuery, gql } from '@apollo/client';
 
 
-//'use client'
-//import { gql, useQuery } from "@apollo/client"
+const GET_LOCATIONS = gql`
 
-// const GET_LOCATIONS = gql`
-//   query GetLocations {
-//     locations {
-//       id
-//       name
-//       description
-//       photo
-//     }
-//   }
-// `;
+  query GetLocations {
 
-// ;
+    locations {
 
-function App() {
+      id
 
-  //const { loading, error, data } = useQuery(GET_LOCATIONS)
+      name
+
+      description
+
+      photo
+
+    }
+
+  }
+
+`;
+
+
+function DisplayLocations() {
+
+    const { loading, error, data } = useQuery(GET_LOCATIONS);
+  
+  
+    if (loading) return <p>Loading...</p>;
+  
+    if (error) return <p>Error : {error.message}</p>;
+  
+  
+    return data.locations.map(({ id, name, description, photo }) => (
+  
+      <div key={id}>
+  
+        <h3>{name}</h3>
+  
+        <img width="400" height="250" alt="location-reference" src={`${photo}`} />
+  
+        <br />
+  
+        <b>About this location:</b>
+  
+        <p>{description}</p>
+  
+        <br />
+  
+      </div>
+  
+    ));
+  
+  }
+export default function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>Choo Choo! This is an example of a create-react-app site running on Railway.</p>
 
-        <p>{`API KEY is ${process.env.REACT_APP_API_KEY}`}</p>
-        <a className="App-link" href="https://react.dev/learn" target="_blank" rel="noreferrer noopener">Learn React</a>
-      </header>
+    <div>
+
+      <h2>My first Apollo app 🚀</h2>
+      <DisplayLocations />
+
     </div>
-  );
-}
 
-export default App;
+  );
+
+}
